@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Book rental Tests">
+
+    <test name="Positive and negative login test">
+        <classes>
+            <class name="tests.loginAndRegisterTests.PositiveAndNegativeLoginTest"/>
+        </classes>
+    </test>
+
+    <test name="Adding, removing and editing titles">
+        <classes>
+            <class name="tests.mainPageTests.MainPageTest"/>
+        </classes>
+    </test>
+
+    <test name="Adding, removing and editing copies">
+        <classes>
+            <class name="tests.showCopiesPageTests.ShowCopiesPageTests"/>
+        </classes>
+    </test>
+
+    <test name="Adding, removing and editing rentals">
+        <classes>
+            <class name="tests.rentPageTest.RentPageTest"/>
+        </classes>
+    </test>
+
+</suite>
