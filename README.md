@@ -1,6 +1,3 @@
 # Rafal_Baldowski-Bookrental-
-W projekcie wykorzystałem aktualnie posiadane umiejętności w zakresie programowania, testowania, tworzenia raportów z testów. 
-Testowana strona znajduje się pod adresem https://ta-bookrental-fe.onrender.com/. 
-W czasie ralizacji za pomocą Postmana został przetestowany backend aplikacji. 
-Do części frontendowej napisałem testy w Javie przy użyciu Selenium. Przyjąłem Page Object Model oraz wzorzec Singleton. raporty z testów generuję przy pomocy biblioteki Allure.
+In the project I used my current skills in programming, testing, creating test reports. The tested page can be found at https://ta-bookrental-fe.onrender.com/. The application backend was tested using Postman. For the frontend part I wrote tests in Java using Selenium. I adopted the Page Object Model and the Singleton pattern. I generate test reports using the Allure library.
 
