@@ -21,7 +21,7 @@ public class BrowserFactory {
                 FirefoxDriver firefoxDriver = new FirefoxDriver(options);
                 return firefoxDriver;
             case EDGE:
-                System.setProperty("webdriver.msedge.driver", LocalWebDriverProperties.getEdgeWebDriverLocation());
+                System.setProperty("webdriver.edge.driver", LocalWebDriverProperties.getEdgeWebDriverLocation());
                 return new EdgeDriver();
             default:
                 throw new IllegalStateException("Unknown browser type! Please check your configuration");

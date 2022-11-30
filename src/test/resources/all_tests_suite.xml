@@ -2,9 +2,18 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="Book rental Tests">
 
-    <test name="Positive and negative login test">
+    <listeners>
+        <listener class-name="utils.testng.listener.TestListener"/>
+    </listeners>
+
+    <test name="Positive and negative login tests">
         <classes>
             <class name="tests.loginAndRegisterTests.PositiveAndNegativeLoginTest"/>
+        </classes>
+    </test>
+    <test name="Positive and negative register tests">
+        <classes>
+            <class name="tests.loginAndRegisterTests.RegisterTests"/>
         </classes>
     </test>
 

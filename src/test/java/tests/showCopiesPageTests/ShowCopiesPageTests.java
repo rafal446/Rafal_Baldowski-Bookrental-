@@ -1,6 +1,6 @@
 package tests.showCopiesPageTests;
 
-import pages.mainPage.MainPage;
+import jdk.jfr.Description;
 import tests.TestBase;
 import org.testng.annotations.Test;
 import pages.loginPage.LoginPage;
@@ -10,11 +10,13 @@ import static org.testng.Assert.*;
 public class ShowCopiesPageTests extends TestBase {
 
     @Test
+    @Description("This test is checks if adding new copies work. It compares number of copies before and after " +
+            "operation.")
     public void shouldAddNewCopyToList() {
 
         ShowCopiesPage showCopiesPage = new LoginPage()
                 .correctLogin()
-                .copiesOfRandomTitle()
+                .copyOfRandomTitle()
                 .addNewCopy();
 
         int numberOfCopiesBeforeOperation = showCopiesPage.getSizeBeforeOperation();
@@ -24,30 +26,23 @@ public class ShowCopiesPageTests extends TestBase {
     }
 
     @Test
-    public void shouldRemoveCopyFromList() {
+    @Description("This test is checks if the remove of one random copy works correct. It compares number of copies " +
+            "before and after operation. If copy has rents history, test checks that message is displayed")
+    public void shouldRemoveCopyFromList() throws InterruptedException {
+            ShowCopiesPage showCopiesPage = new LoginPage()
+                    .correctLogin()
+                    .copyOfRandomTitle()
+                    .removeRandomCopy();
 
-        ShowCopiesPage showCopiesPage = new LoginPage()
-                .correctLogin()
-                .copiesOfRandomTitle();
-        int numberOfCopiesBeforeOperation = showCopiesPage.getCopiesList().size();
-
-        ShowCopiesPage newShowCopiesPage =  showCopiesPage.removeRandomCopy();
-        int numberOfCopiesAfterOperation = newShowCopiesPage.getCopiesList().size();
-        System.out.println(numberOfCopiesAfterOperation);
+            int numberOfCopiesBeforeOperation = showCopiesPage.getSizeBeforeOperation();
+            int numberOfCopiesAfterOperation = showCopiesPage.getCopiesList().size();
 
             if (numberOfCopiesBeforeOperation == numberOfCopiesAfterOperation + 1) {
                 assertEquals(numberOfCopiesBeforeOperation, numberOfCopiesAfterOperation + 1);
             } else {
                 assertEquals(showCopiesPage.getAlertMessage(), "You can't remove copy with the rents history!");
             }
+        }
+
     }
 
-    @Test
-    public void shouldEditCopy() {
-
-        ShowCopiesPage showCopiesPage = new LoginPage()
-                .correctLogin()
-                .copiesOfRandomTitle()
-                .editRandomCopy();
-    }
-}

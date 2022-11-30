@@ -1,5 +1,6 @@
 package pages.mainPage;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -47,7 +48,7 @@ public class MainPage {
         PageFactory.initElements(DriverManager.getWebDriver(), this);
     }
 
-
+    @Step("Adding new title to list {title} / {author} / {year}")
     public MainPage addNewTitleToList(String title, String author, String year) {
         startedNumbersOfTitles = getTitlesList().size();
         WaitForElement.waitUntilElementIsClickable(addNewTitleButton);
@@ -59,14 +60,14 @@ public class MainPage {
         WaitForElement.waitUntilInvisibilityOfElement(addTitleForm);
         return this;
     }
-
+    @Step("Getting random title from liost")
     public WebElement randomTitleFromList() {
         Random random = new Random();
         int randomTitle = random.nextInt(getTitlesList().size() - 1);
         title =  titles.get(randomTitle);
         return  title;
     }
-
+    @Step("Removing random title from list")
     public MainPage removeElementFromList() {
         startedNumbersOfTitles = getTitlesList().size();
         WaitForElement.waitUntilElementIsVisible(titlesPage);
@@ -75,7 +76,7 @@ public class MainPage {
         WaitForElement.waitUntilElementIsVisible(addNewTitleButton);
         return this;
     }
-
+    @Step("Editing random title to : {newTitle} / {newAuthor} / {newYear}")
     public MainPage editRandomTitle(String newTitle, String newAuthor, String newYear) {
         WebElement toEdit = randomTitleFromList();
         idOfTitle = toEdit.getAttribute("id");
@@ -92,50 +93,50 @@ public class MainPage {
         getTitlesList();
         return this;
     }
-
+    @Step("Getting edited title")
     public WebElement getEditedTitle() {
         WebElement element;
         WaitForElement.waitUntilElementIsVisible(titlesPage);
         element = titlesPage.findElement(By.id(idOfTitle));
         return element;
     }
-
+    @Step("Getting title after edition")
     public String getTitleAfterEdit() {
         return getEditedTitle().findElement(By.xpath(xpathToTitle)).getText();
     }
-
+    @Step("Getting author after edition")
     public String getAuthorAfterEdition() {
         return getEditedTitle().findElement(By.xpath(xpathToAuthor)).getText();
     }
-
+    @Step("Getting year of publication after edition")
     public String getYearAfterEdition() {
         return getEditedTitle().findElement(By.xpath(xpathToYear)).getText();
     }
-
+    @Step("Getting all titles")
     public List<WebElement> getTitlesList() {
         WaitForElement.waitUntilElementIsVisible(titlesPage);
         titles = getTitlesPage().findElements(By.xpath("//li[@class=\"titles-list__item list__item\"]"));
         return titles;
     }
-
+    @Step("Checking is titles displayed")
     public boolean isTitlesFieldDisplayed() {
         return titlesPage.isDisplayed();
     }
-
+    @Step("Getting titles page")
     public WebElement getTitlesPage() {
         return titlesPage;
     }
-
-    public ShowCopiesPage copiesOfRandomTitle() {
+    @Step("Getting copy of random title")
+    public ShowCopiesPage copyOfRandomTitle() {
         randomTitleFromList().findElement(By.xpath(xpathToShowCopiesButton)).click();
         WaitForElement.waitUntilInvisibilityOfElement(addTitleForm);
         return new ShowCopiesPage();
     }
-
+    @Step("Getting alert message")
     public String getAlertMessage() {
         return alertMessage.getText();
     }
-
+    @Step("Getting started number of title")
     public int getStartedNumbersOfTitles() {
         return startedNumbersOfTitles;
     }

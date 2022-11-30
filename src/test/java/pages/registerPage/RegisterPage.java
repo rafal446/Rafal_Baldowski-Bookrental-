@@ -2,7 +2,7 @@ package pages.registerPage;
 
 import driver.DriverManager;
 import driver.WaitForElement;
-import org.openqa.selenium.By;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -27,31 +27,19 @@ public class RegisterPage {
     public RegisterPage() {
         PageFactory.initElements(DriverManager.getWebDriver(), this);
     }
-
-    public void typeLoginName(String userName) {
-        loginField.sendKeys(userName);
-    }
-    public void typePasswordField(String password) {
-        passwordField.sendKeys(password);
-    }
-    public void typeRepeatPasswordField(String password) {
-        repeatPasswordField.sendKeys(password);
-    }
-    public void clickOnSignUpButton() {
-        signUpButton.click();
-    }
+    @Step("Getting success sign up message")
     public String getSuccessSignUpMessage() {
         WaitForElement.waitUntilElementIsVisible(successSignUpMessage);
         return successSignUpMessage.getText();
     }
-
+    @Step("Getting wrong register message")
     public String getWrongRegisterAlert() {
         WaitForElement.waitUntilElementIsVisible(wrongRegisterAlert);
         return wrongRegisterAlert.getText();
     }
-
+    @Step("Register with correct data")
     public String registerWithCorrectData() {
-        WaitForElement.waitUntilElementIsVisible(loginField);
+        WaitForElement.waitUntilElementIsVisible(repeatPasswordField);
         String data = randomUserAndPassword();
         loginField.sendKeys(data);
         passwordField.sendKeys(data);
@@ -61,9 +49,9 @@ public class RegisterPage {
         String message = getSuccessSignUpMessage();
         return message;
     }
-
+    @Step("Register uswer that already exists")
     public String registerUserThatAlreadyExists() {
-        WaitForElement.waitUntilElementIsVisible(loginField);
+        WaitForElement.waitUntilElementIsVisible(repeatPasswordField);
         loginField.sendKeys("testUser");
         passwordField.sendKeys("testPassword");
         repeatPasswordField.sendKeys("testPassword");
@@ -72,9 +60,9 @@ public class RegisterPage {
         String message = getWrongRegisterAlert();
         return message;
     }
-
+    @Step("Register user when second password is different than first")
     public String registerUserWhenPasswordDoesNotMatch() {
-        WaitForElement.waitUntilElementIsVisible(loginField);
+        WaitForElement.waitUntilElementIsVisible(repeatPasswordField);
         String data = randomUserAndPassword();
         loginField.sendKeys(data);
         passwordField.sendKeys(data);
@@ -84,7 +72,7 @@ public class RegisterPage {
         String message = getWrongRegisterAlert();
         return message;
     }
-
+    @Step("Generating random data to create new user")
     public String randomUserAndPassword() {
         Random random = new Random();
         int randomNumber = random.nextInt(100000);

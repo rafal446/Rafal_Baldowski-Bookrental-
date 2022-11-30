@@ -1,5 +1,6 @@
 package tests.mainPageTests;
 
+import jdk.jfr.Description;
 import org.testng.annotations.Test;
 import pages.loginPage.LoginPage;
 import pages.mainPage.MainPage;
@@ -11,6 +12,8 @@ import static org.testng.Assert.assertTrue;
 public class MainPageTest extends TestBase {
 
     @Test
+    @Description("This test checks if the addition titles work, it adds new title to list and compares number of titles " +
+            "before and after addition")
     public void shouldAddNewTitleToList() {
 
         MainPage mainPage = new LoginPage()
@@ -24,6 +27,8 @@ public class MainPageTest extends TestBase {
     }
 
     @Test
+    @Description("This test check if remove titles work, it delete one random title and compares number of title before " +
+            "and after delete. In case when title has copies, it checks if the message is displayed")
     public void shouldRemoveTitleFromList() {
         MainPage mainPage = new LoginPage()
                 .correctLogin()
@@ -36,11 +41,12 @@ public class MainPageTest extends TestBase {
             assertEquals(startedNumberOfTitles, numberOfTitlesAfterRemoved + 1);
         } else {
             assertEquals(mainPage.getAlertMessage(), "You can't remove titles with copies!");
-            System.out.println(mainPage.getAlertMessage());
         }
     }
 
     @Test
+    @Description("This test change title, author and year of publication of one random title, next it searches this " +
+            "title by id number and compares")
     public void shouldEditTitle() {
         MainPage mainPage = new LoginPage()
                 .correctLogin()

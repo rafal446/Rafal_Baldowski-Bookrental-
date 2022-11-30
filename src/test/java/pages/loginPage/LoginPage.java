@@ -1,5 +1,6 @@
 package pages.loginPage;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -26,20 +27,24 @@ public class LoginPage {
     WebElement warningLabel;
     @FindBy(xpath = "//button[@id=\"register-btn\"]")
     WebElement signUpButton;
-
+    @Step("Type into user name input {username}")
     public void typeIntoUserNameInput(String username) {
         userNameInput.sendKeys(username);
     }
+    @Step("Type into password input {password}")
     public void typeIntoPasswordInput(String password) {
         passwordInput.sendKeys(password);
     }
+    @Step("Click on login button")
     public void clickOnLogInButton() {
         logInButton.click();
     }
+    @Step("Getting warning message")
     public String getWarningMessage() {
         WaitForElement.waitUntilElementIsVisible(warningLabel);
         return warningLabel.getText();
     }
+    @Step("Login to page")
     public MainPage correctLogin() {
         WaitForElement.waitUntilElementIsVisible(userNameInput);
         typeIntoPasswordInput("testPassword");
@@ -48,6 +53,7 @@ public class LoginPage {
         WaitForElement.waitUntilInvisibilityOfElement(logInButton);
         return new MainPage();
     }
+    @Step("Attempt to login with incorrect data")
     public String tryToLogInWithIncorrectData() {
         typeIntoUserNameInput("wrongUser");
         typeIntoPasswordInput("wrongPassword");
@@ -55,8 +61,9 @@ public class LoginPage {
         String message = getWarningMessage();
         return message;
     }
-    public void clickSignUpButton() {
+    @Step("Click on sing up button")
+    public RegisterPage clickSignUpButton() {
         signUpButton.click();
-        WaitForElement.waitURL();
+        return new RegisterPage();
     }
 }
